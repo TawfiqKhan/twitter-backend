@@ -9,6 +9,7 @@ const logger = require("morgan");
 
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
+const tweetRouter = require("./routes/tweet");
 const usersRouter = require("./routes/users");
 
 connectDB();
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
+app.use("/tweet", tweetRouter);
 app.use("/users", usersRouter);
 
 app.use(notFound);
