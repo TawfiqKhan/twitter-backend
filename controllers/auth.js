@@ -27,6 +27,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
         id: user._id,
         username: user.username,
       },
+      token,
     });
   } else {
     res.status(400);
@@ -49,12 +50,12 @@ exports.loginUser = asyncHandler(async (req, res, next) => {
       httpOnly: true,
       maxAge: secondsInWeek * 1000,
     });
-
     res.status(200).json({
       user: {
         id: user._id,
         username: user.username,
       },
+      token,
     });
   } else {
     res.status(401);
