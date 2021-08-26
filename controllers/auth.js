@@ -23,11 +23,9 @@ exports.registerUser = asyncHandler(async (req, res) => {
     });
 
     res.status(201).json({
-      success: {
-        user: {
-          id: user._id,
-          username: user.username,
-        },
+      user: {
+        id: user._id,
+        username: user.username,
       },
     });
   } else {
@@ -53,11 +51,9 @@ exports.loginUser = asyncHandler(async (req, res, next) => {
     });
 
     res.status(200).json({
-      success: {
-        user: {
-          id: user._id,
-          username: user.username,
-        },
+      user: {
+        id: user._id,
+        username: user.username,
       },
     });
   } else {
