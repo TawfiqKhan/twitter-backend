@@ -1,12 +1,14 @@
 const User = require("../models/User");
 const asyncHandler = require("express-async-handler");
 const generateToken = require("../utils/generateToken");
+const verifyInput = require("../utils/verifyInput");
 
 // @route POST /auth/register
 // @desc Register user
 // @access Public
 exports.registerUser = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
+  await verifyInput(req.body, res);
   const user = await User.create({
     username,
     password,
