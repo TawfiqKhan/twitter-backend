@@ -35,6 +35,7 @@ exports.validateTweet = [
     next();
   },
 ];
+
 exports.validateChat = [
   check("userId", "User id is required").notEmpty(),
   check("otherUserId", "otherUser id is required").notEmpty(),

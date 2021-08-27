@@ -1,5 +1,4 @@
 const colors = require("colors");
-const createError = require("http-errors");
 const express = require("express");
 const { notFound, errorHandler } = require("./middleware/error");
 const connectDB = require("./db");
@@ -11,7 +10,6 @@ const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 const tweetRouter = require("./routes/tweet");
 const chatRouter = require("./routes/chat");
-const usersRouter = require("./routes/users");
 
 connectDB();
 const app = express();
@@ -30,7 +28,6 @@ app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/tweet", tweetRouter);
 app.use("/chat", chatRouter);
-app.use("/users", usersRouter);
 
 app.use(notFound);
 app.use(errorHandler);
