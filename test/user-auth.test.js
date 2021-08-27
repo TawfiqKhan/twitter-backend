@@ -12,13 +12,6 @@ beforeAll((done) => {
   );
 });
 
-afterAll((done) => {
-  mongoose.disconnect();
-  done();
-});
-
-jest.useRealTimers();
-
 describe("User Registration and login", () => {
   test("POST/auth/register", async () => {
     const username = "jest-register";
@@ -96,4 +89,9 @@ describe("User Registration and login", () => {
         expect(response.body.error).toBe("Invalid username or password");
       });
   });
+});
+
+afterAll((done) => {
+  mongoose.disconnect();
+  done();
 });

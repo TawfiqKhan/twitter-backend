@@ -17,14 +17,9 @@ beforeAll((done) => {
     .send({ username: "demo", password: "test12345" })
     .end((err, response) => {
       userId = response.body.user.id;
-      token = response.body.token; // save the token!
+      token = response.body.token;
       done();
     });
-});
-
-afterAll((done) => {
-  mongoose.disconnect();
-  done();
 });
 
 test("POST /tweet", async () => {
@@ -74,4 +69,9 @@ test("DELETE /tweet", async () => {
       expect(response.body).toBeTruthy();
       expect(response.body).toBe("Deleted");
     });
+});
+
+afterAll((done) => {
+  mongoose.disconnect();
+  done();
 });

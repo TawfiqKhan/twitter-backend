@@ -15,26 +15,26 @@ exports.sendMessage = asyncHandler(async (req, res) => {
       throw new Error("No Chat found");
     }
     chat.messages.push({ text, sender: userId });
-    chat.save();
+    await chat.save();
     res.status(201).json(chat);
-  }
-
-  // if we dont have id, first make sure it doesn't already exist
-  const chat = await Chat.findOne({ user: userId, otherUser: otherUserId });
-  if (chat) {
-    chat.messages.push({ text, sender: userId });
-    chat.save();
-    res.status(201).json(chat);
-  }
-  // if chat doesnt exist, create one and add the message
-  else {
-    const chat = await Chat.create({
-      user: userId,
-      otherUser: otherUserId,
-    });
-    chat.messages.push({ text, sender: userId });
-    chat.save();
-    res.status(201).json(chat);
+  } else {
+    // if we dont have id, first make sure it doesn't already exist
+    const chat = await Chat.findOne({ user: userId, otherUser: otherUserId });
+    if (chat) {
+      chat.messages.push({ text, sender: userId });
+      await chat.save();
+      res.status(201).json(chat);
+    }
+    // if chat doesnt exist, create one and add the message
+    else {
+      const chat = await Chat.create({
+        user: userId,
+        otherUser: otherUserId,
+      });
+      chat.messages.push({ text, sender: userId });
+      await chat.save();
+      res.status(201).json(chat);
+    }
   }
 });
 
